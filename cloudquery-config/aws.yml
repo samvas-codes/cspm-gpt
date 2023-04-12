@@ -1,0 +1,18 @@
+kind: source
+spec:
+  # Source spec section
+  name: aws
+  path: cloudquery/aws
+  version: "v15.6.0"
+  tables: ["*"]
+  destinations: ["postgresql"]
+  spec: 
+    # AWS Spec section described below
+    regions:
+      - us-west-1
+      - us-east-1
+      - us-west-2 	 
+    accounts:
+      - id: "sam"
+        local_profile: "default"
+    aws_debug: true

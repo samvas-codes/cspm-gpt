@@ -1,0 +1,24 @@
+kind: source
+spec:
+  name: aws
+  path: cloudquery/aws
+  version: "v15.6.0"
+  tables: ["*"]
+  destinations: ["postgresql"] 
+    regions:
+      - us-west-1
+      - us-east-1
+      - us-west-2 
+    accounts:
+      - id: "sam"
+        local_profile: "default"
+    aws_debug: true
+
+---
+kind: destination
+spec:
+  name: postgresql
+  path: cloudquery/postgresql
+  version: "v3.0.2"
+  spec:
+    connection_string: "postgresql://postgres:pass@localhost:5432/postgres?sslmode=disable"

@@ -1,0 +1,65 @@
+import openai
+import streamlit as st
+import pandas as pd
+from langchain.agents import create_sql_agent
+from langchain.agents.agent_toolkits import SQLDatabaseToolkit
+from langchain.sql_database import SQLDatabase
+from langchain.llms.openai import OpenAI
+from langchain.agents import AgentExecutor
+from langchain.chat_models import ChatOpenAI
+
+openai.api_key = st.secrets['OPENAI_API_KEY']
+
+db_products_dict = {
+    'CloudQ Postgres': ['postgres', 'postgresql+psycopg2'],
+    # todo: add more DBs
+    # 'custom mySQL': ['mySQL', '...'],
+}
+
+with st.sidebar:
+    st.write('Pick your DB connection:')
+    db_type = st.selectbox('DB connection', db_products_dict.keys())
+
+    # if the user has selected a custom database, then show the input fields, else use the public DB
+    if db_type == 'CloudQ Postgres':
+        db_host = st.text_input('host', 'localhost')
+        db_port = st.text_input('port', '5432')
+        db_user = st.text_input('user', 'postgres')
+        db_password = st.text_input('password', 'postgres', type='password')
+        db_name = st.text_input('database', 'postgres')
+
+    with st.form(key='my_form_to_submit'):
+        user_request = st.text_area("Let chatGPT to do SQL for you")
+        submit_button = st.form_submit_button(label='Submit')
+
+if submit_button:
+    # check if the user has entered a request
+    if not user_request:
+        st.error('Please enter a request')
+        st.stop()
+
+    # check if the user has entered a database credentials
+    if not db_host or not db_user or not db_password or not db_name or not db_port:
+        st.error('Please enter a database credentials')
+        st.stop()
+    
+    db = SQLDatabase.from_uri("postgresql://postgres:pass@localhost:5432/postgres?sslmode=disable")
+    agent_executor = create_sql_agent(
+    llm=OpenAI(temperature=0, model_name='gpt-4'),
+    toolkit = SQLDatabaseToolkit(db=db),
+    verbose=True
+    )
+    code = agent_executor.run(user_request)
+    #pretty_code = '```sql\n' + code + '\n```'
+    #code = code.replace('\n', ' ')  
+
+    #with st.expander("See executed code"):
+    #    st.write(pretty_code)
+    #with st.expander("See introspected BD structure"):
+    #    st.write(doc)
+
+    #df = pd.read_sql_query(sql=text(code), con=engine.connect())
+
+    st.write("## The results")
+    st.write(code)
+    st.write("A new way to query the security of your cloud 😱")
