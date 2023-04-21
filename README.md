@@ -97,5 +97,8 @@ Once the app is running and you have ingested data from your AWS accounts (eg) u
     4. CISOs that want to understand the state of their environment can easily ask questions 
 ## Roadmap
 
-Will be updated
+    1. Updates to include knowledge graphs as a datasource (Neo4J, AWS Neptune)
+    2. Adding vector stores to cache similar queries 
+    3. Display generated queries to allow manual intervention
+
 
