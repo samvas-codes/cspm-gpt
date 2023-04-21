@@ -1,3 +1,5 @@
+import os
+import subprocess
 import openai
 import streamlit as st
 import pandas as pd
@@ -16,7 +18,24 @@ db_products_dict = {
     # 'custom mySQL': ['mySQL', '...'],
 }
 
+# Define a function to start the 'cloudquery sync' command
+def start_cloudquery_sync():
+    # Use subprocess.Popen to execute the 'cloudquery sync' command and get a process object
+    command = 'cloudquery sync config.yml'
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    with st.code (process, language="shell-session"):
+        # Stream the output of the command to the browser in real-time
+        for line in iter(process.stdout.readline, b''):
+            st.write(line.decode().strip())
+
+        # Print the output of the command to the terminal console
+        for line in iter(process.stderr.readline, b''):
+            print(line.decode().strip())
+
 with st.sidebar:
+    
+    scan_button = st.button('Scan accounts')
+
     st.write('Pick your DB connection:')
     db_type = st.selectbox('DB connection', db_products_dict.keys())
 
@@ -31,6 +50,9 @@ with st.sidebar:
     with st.form(key='my_form_to_submit'):
         user_request = st.text_area("Let chatGPT to do SQL for you")
         submit_button = st.form_submit_button(label='Submit')
+
+if scan_button: 
+    start_cloudquery_sync()
 
 if submit_button:
     # check if the user has entered a request
