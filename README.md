@@ -4,12 +4,12 @@
 Cloud Security Posture Management (CSPM) tools have evolved over the past years. What began as only as audit of configurations of cloud resources has grown to a complex capability that requires complex querying across relationships, security related data and events. 
 Users using these tools need to customize them to their environment to make it easier to address security issues. This requires building their own custom logic or queries using query languages that can be difficult to learn and adapt to. 
 
-The following is a simple example of how LLMs and langchain agents can simplify asking questions to understand the security posture of a cloud environment.  
+The following is a simple example of how LLMs and langchain agents can simplify asking questions to understand the security posture of a cloud environment.  The project now supports the use of multiple DB types including PostgreSQL and Neo4j. It has also been tested to validate shortest paths to resources thereby creating a PoC for attack paths if assets are labeled appropriately. 
 
 Disclaimer : The app is a demo and several improvements can be made. The queries made and results displayed are currentl best effort. 
 
 
-
+NOTE: The dockerfile hasnt been updated to include GraphDBs.   
 
 ## Installation
 
@@ -19,8 +19,8 @@ There are two options to use this project.
     2. Run it as a containarized streamlit app
 
 ### Prequisites
-    1. Install cloudquery on your machine.
-    2. This example uses a Postgres DB as its backend
+    1. Install cloudquery or Cartography on your machine.
+    2. This example uses either a Postgres or Neo4j DB as its backend
 
 
 ## Run Locally
@@ -88,6 +88,7 @@ Once the app is running and you have ingested data from your AWS accounts (eg) u
     3. How many ec2 instances are public ? What are their public IPs ? List the instance ids and the public IPs as a table.  
     4. List all CIS checks that have failed. Get the resources that have failed these checks. List the checks failed and resources as a table.
     5. How many ec2 instances also have an IAM role attached to it. List the instance IDs, IAM roles and the IAM policy attached to the role
+    6. (GRAPH USE CASE) Find the shortest path between an EC2 instance and an S3 bucket, describe how they are connected
 
 
 ## Use cases
@@ -97,7 +98,7 @@ Once the app is running and you have ingested data from your AWS accounts (eg) u
     4. CISOs that want to understand the state of their environment can easily ask questions 
 ## Roadmap
 
-    1. Updates to include knowledge graphs as a datasource (Neo4J, AWS Neptune)
+    1. Updates to include knowledge graphs as a datasource (Neo4J, AWS Neptune) -- DONE 
     2. Adding vector stores to cache similar queries 
     3. Display generated queries to allow manual intervention
 
