@@ -72,13 +72,13 @@ if submit_button:
     verbose=True
     )
     code = agent_executor.run(user_request)
-    #pretty_code = '```sql\n' + code + '\n```'
-    #code = code.replace('\n', ' ')  
+    pretty_code = '```sql\n' + code + '\n```'
+    code = code.replace('\n', ' ')  
 
-    #with st.expander("See executed code"):
-    #    st.write(pretty_code)
+    with st.expander("See executed code"):
+        st.write(pretty_code)
     #with st.expander("See introspected BD structure"):
-    #    st.write(doc)
+     #   st.write(db)
 
     #df = pd.read_sql_query(sql=text(code), con=engine.connect())
 
