@@ -101,7 +101,8 @@ if submit_button:
     
     if db_type == 'Neo4j Graph': 
         graph = Neo4jGraph(url="bolt://localhost:", username="neo4j", password="password")
-        chain = GraphCypherQAChain.from_llm(ChatOpenAI(model_name='gpt-4', temperature=0), graph=graph, verbose=True)
+        graph.refresh_schema()
+        chain = GraphCypherQAChain.from_llm(ChatOpenAI(model_name='gpt-4', temperature=0), graph=graph, verbose=True, return_intermediate_steps=True)
         code = chain.run (user_request)
         st.write("## The results")
         st.write(code)
