@@ -1,10 +1,10 @@
 
-# Cloud Security Posture Management using Cloudquery and GPT-4  
+# Cloud Security Posture Management powered by GPT-4  
 
 Cloud Security Posture Management (CSPM) tools have evolved over the past years. What began as only as audit of configurations of cloud resources has grown to a complex capability that requires complex querying across relationships, security related data and events. 
 Users using these tools need to customize them to their environment to make it easier to address security issues. This requires building their own custom logic or queries using query languages that can be difficult to learn and adapt to. 
 
-The following is a simple example of how LLMs and langchain agents can simplify asking questions to understand the security posture of a cloud environment.  The project now supports the use of multiple DB types including PostgreSQL and Neo4j. It has also been tested to validate shortest paths to resources thereby creating a PoC for attack paths if assets are labeled appropriately. 
+The following is a simple example of how LLMs and langchain agents can simplify asking questions to understand the security posture of a cloud environment.  The project now supports the use of multiple DB types including PostgreSQL and Neo4j. It is made extensible by also using different data ingest platforms including Cartography and Cloudquery. Initial attempts to validate shortest paths have been successful if prompted appropriately. This is intended to be a PoC for generating ad-hoc attack paths if assets are labeled appropriately. 
 
 Disclaimer : The app is a demo and several improvements can be made. The queries made and results displayed are currentl best effort. 
 
