@@ -1,5 +1,5 @@
 
-# Cloud Security Posture Management powered by GPT-4  
+# Cloud Security Posture Management(CSPM) powered by GPT-4  
 
 Cloud Security Posture Management (CSPM) tools have evolved over the past years. What began as only as audit of configurations of cloud resources has grown to a complex capability that requires complex querying across relationships, security related data and events. 
 Users using these tools need to customize them to their environment to make it easier to address security issues. This requires building their own custom logic or queries using query languages that can be difficult to learn and adapt to. 
