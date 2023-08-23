@@ -101,7 +101,7 @@ Now lets ask the typical attack path question - can you find an ec2 instance tha
 ![ec2-s3-llm-query](/img/ec2-s3-example-generated-cypher.jpg?raw=true "Asking GPT to write a query to find EC2 instances with access to S3")
 
 Is it hallucinating? Nope!
-![ec2-s3-llm-query](/img/ec2-exposed-s3-example-verified-cypher.jpg.jpg?raw=true "Verifying a query to find EC2 instances with access to S3")
+![ec2-s3-llm-query](/img/ec2-exposed-s3-example-verified-cypher.jpg?raw=true "Verifying a query to find EC2 instances with access to S3")
 
 Taking it a step further, lets find internet exposed ec2 instance that has access to an s3 bucket
 ![ec2-s3-llm-query](/img/ec2-exposed-s3-example-generated-cypher.jpg?raw=true "Asking GPT to write a query to find EC2 instances with access to S3")
