@@ -88,8 +88,26 @@ Once the app is running and you have ingested data from your AWS accounts (eg) u
     3. How many ec2 instances are public ? What are their public IPs ? List the instance ids and the public IPs as a table.  
     4. List all CIS checks that have failed. Get the resources that have failed these checks. List the checks failed and resources as a table.
     5. How many ec2 instances also have an IAM role attached to it. List the instance IDs, IAM roles and the IAM policy attached to the role
-    6. (GRAPH USE CASE) Find the shortest path between an EC2 instance and an S3 bucket, describe how they are connected
+    6. Find the shortest path between an EC2 instance and an S3 bucket, describe how they are connected (GRAPH USE CASE)
 
+## Running a few examples and their results 
+Lets start simple and find EC2 instances that have EBS volumes attached to them. 
+![ec2-ebs-llm-query](/img/ec2-ebs-example-generated-cypher.jpg?raw=true "Asking GPT to write a query to find EBS volumes attached to EC2 instances")
+
+Lets verify if this query actually works by going to neo4j and querying the DB
+![ec2-ebs-verified-query](/img/ec2-ebs-example-graph-verified-cypher-query.jpg?raw=true "Verifying a query to find EBS volumes attached to EC2 instances")
+
+Now lets ask the typical attack path question - can you find an ec2 instance that has access to an s3 bucket
+![ec2-s3-llm-query](/img/ec2-s3-example-generated-cypher.jpg?raw=true "Asking GPT to write a query to find EC2 instances with access to S3")
+
+Is it hallucinating? Nope!
+![ec2-s3-llm-query](/img/ec2-exposed-s3-example-verified-cypher.jpg.jpg?raw=true "Verifying a query to find EC2 instances with access to S3")
+
+Taking it a step further, lets find internet exposed ec2 instance that has access to an s3 bucket
+![ec2-s3-llm-query](/img/ec2-exposed-s3-example-generated-cypher.jpg?raw=true "Asking GPT to write a query to find EC2 instances with access to S3")
+
+
+What I currently observe is, as long as the schema is known to GPT, and you can prompt engineer your question, the data is pretty accurate. 
 
 ## Use cases
     1. The app can be a natural language query builder for CSPM tools 
